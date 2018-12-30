@@ -21,8 +21,35 @@
 {% endblock %}
 
 {% block content %}
+  
+<!-- Nav: block, street and filter -->  
+<ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if statusFilter %}
+           {{ statusFilter|capitalize }}
+        {% else %}
+           Not Received
+        {% endif %}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="?filter=all">
+          All
+        </a>
+        <a class="dropdown-item" href="?filter=received">
+          Received
+        </a>
+        <a class="dropdown-item" href="/distro">
+          Not Received
+        </a>
+      </div>
+    </div>
+  </li>
+</ul>
+
   <div class="container">
-    <p>{{ foo }}</p>
+    <p>{{ foo }}{{ statusFilter }}</p>
   </div>
 {% endblock %}
 
