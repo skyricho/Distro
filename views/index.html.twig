@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}starter-app{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="index.php">starter-app</a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <p>{{ foo }}</p>
+  </div>
+{% endblock %}
+
