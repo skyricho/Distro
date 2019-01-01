@@ -9,17 +9,20 @@ if (isset($_POST['delete_publisher'])) {
     if (FileMaker::isError($result)) {
 	    echo "<p>Error: " . $result->getMessage() . "</p>"; exit;
 	}
-	echo $firstName . ' has been deleted';
+	$msg = $_POST['firstName'] . ' has been deleted.';
+	header('Location: https://qc.r2labs.com/distro/?msg=' . $msg); 
 
 } elseif (isset($_POST['add_publisher'])) {
 	$request = $fm->createRecord('web');
-	$request->setField('firstName', $_POST['firstName']);
+	$request->setField('firstName', $_POST['firstName']);	
 	$result=$request->commit();
 
     if (FileMaker::isError($result)) {
 	    echo "<p>Error: " . $result->getMessage() . "</p>"; exit;
 	}
-	echo $_POST['firstName'] . ' has been added.';
+    
+	$msg = $_POST['firstName'] . ' has been added.';
+	header('Location: https://qc.r2labs.com/distro/?msg=' . $msg); 
 
 } elseif (isset($_POST['received'])) {
 	$firstName = $_POST['firstName'];
