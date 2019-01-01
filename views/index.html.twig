@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}starter-app{% endblock %}
+{% block title %}Distro{% endblock %}
 
 {% block Navbar %}
-  <a class="navbar-brand" href="index.php">starter-app</a>
+  <a class="navbar-brand" href="index.php">Distro</a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>          
   </button>
@@ -11,17 +11,46 @@
   <div class="navbar-collapse collapse" id="navbarsExample01" style="">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled Link</a>
+        <a class="nav-link" href="#exampleModal" data-toggle="modal" data-target="#exampleModal">Add Publisher</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="initialisms/">Initialisms</a>
       </li>
     </ul>
   </div>
 {% endblock %}
 
 {% block content %}
-  
+<!-- Modal: Add Publisher -->
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Publisher</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="publisher.php" method="POST">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">First Name</span>
+            </div>
+            <input type="text" class="form-control" aria-describedby="basic-addon3" name="firstName" value="">
+          </div>
+      </div>
+      <div class="modal-footer">
+          <input class="btn btn-primary" type="submit" name="add_publisher" value="Add Publisher">
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Nav: block, street and filter -->  
 <ul class="nav">
   <li class="nav-item">
@@ -48,8 +77,45 @@
   </li>
 </ul>
 
+{% if msg %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ msg }}
+  </div>
+{% endif %}
+
+<ul class="list-group">
+  {% for publisher in publishers %}
+    <li id="publisher-{{ publisher.id }}" class="list-group-item">
+      <a data-toggle="collapse" href="#collapse-{{ publisher.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ publisher.id }}">
+        {{ publisher.firstName }}
+      </a>
+      <div class="float-right text-right">
+        <ul class="list-unstyled">
+          {% for standingRequest in publisher.standingRequests %}
+            <li>
+              <span class="badge badge-{{ standingRequest.color }}">{{ standingRequest.itemCode }}-{{ standingRequest.languageCode }} <span class="badge badge-pill badge-light">{{ standingRequest.quantity }}</span></span>
+            </li>
+          {% endfor %}
+        </ul>
+        <form action="publisher.php" method="POST">
+          <input type="hidden" name="id" value="' . $record->getField('id') . '">
+          <input type="hidden" name="firstName" value="' . $record->getField('firstName') . '">
+          <input class="btn btn-outline-primary btn-sm mt-2" type="submit" name="received" value="Received">
+        </form>
+      </div>
+      <div class="collapse mt-6" id="collapse-{{ publisher.id }}">
+        <form action="publisher.php" method="POST">
+          <input type="hidden" name="id" value="{{ publisher.id }}">
+          <input type="hidden" name="firstName" value="{{ publisher.firstName}}">
+          <input class="btn btn-outline-danger btn-sm btn-block mt-2" type="submit" name="delete_publisher" value="Delete Name">
+        </form>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
   <div class="container">
-    <p>{{ foo }}{{ statusFilter }}</p>
+    <p>{{ foo }}</p>
   </div>
 {% endblock %}
 
