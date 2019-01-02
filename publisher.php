@@ -33,7 +33,7 @@ if (isset($_POST['delete_publisher'])) {
     if (FileMaker::isError($result)) {
 	    echo "<p>Error: " . $result->getMessage() . "</p>"; exit;
 	}
-	echo '<i>received</i>';
+	echo '<i>Received</i>';
 
 }
 
