@@ -14,7 +14,7 @@
 
 
 ### DISTRO Tables
-**Publisher:** id, firstName
-**StandingRequest:** periodical, quantity, langauge
-**Periodical:** title, itemCode
-**Language:** langauge
+- **Publisher:** id, firstName
+- **StandingRequest:** periodical, quantity, langauge
+- **Periodical:** title, itemCode
+- **Language:** langauge
