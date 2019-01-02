@@ -44,9 +44,9 @@
           </div>
       </div>
       <div class="modal-footer">
-          <input class="btn btn-primary" type="submit" name="add_publisher" value="Add Publisher">
+          <input class="btn btn-outline-primary" type="submit" name="add_publisher" value="Add Publisher">
         </form>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -64,8 +64,8 @@
       </div>
       <div class="modal-body">
       <p>Are you sure?</p>
-       <a class="btn btn-danger" href="?script=reset">Reset 'Received'<a>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <a class="btn btn-outline-danger" href="?script=reset">Reset 'Received'<a>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -140,9 +140,9 @@
 
       <!-- Collapse -->
       <div class="collapse" id="collapse-{{ publisher.id }}">
-        <div class="card">
+        <!-- card: Add Request -->
+        <div class="card mt-3">
           <div class="card-body">
-            <!-- Add Request -->
             <div id="alert-{{ publisher.id }}"></div>
             <h5 class="card-title">New Request</h5>
             <form ic-post-to="standing-request.php" ic-target="#alert-{{ publisher.id }}">
@@ -152,7 +152,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroupSelect01">Item Code</span>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01" name="itemCode">
+                <select class="custom-select" id="inputGroupSelect01" name="itemCode" required>
                   <option selected>Choose...</option>
                   {% for itemCode in itemCodes %}   
                   <option value="{{ itemCode }}">{{ itemCode }}</option>
@@ -178,16 +178,40 @@
                   {% endfor %}
                 </select>
               </div>
-              <input class="btn btn-outline-primary btn-block" type="submit" name="add-request" value="Add Request">
+              <input class="btn btn-outline-secondary btn-block" type="submit" name="add-request" value="Add Request">
             </form>
           </div>
-        </div>
+        </div><!-- card: Add request -->
+
+        <!-- card: Delete Request -->
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-title">Delete Request</h5>
+            <ul class="list-group list-group-flush">
+            {% for standingRequest in publisher.standingRequests %}
+              <li class="list-group-item">
+                <div class="clearfix" id="delete-request-{{ standingRequest.id }}">
+                  <div class="float-left">
+                    {{ standingRequest.itemCode }}-{{ standingRequest.languageCode }}<span class="badge badge-pill badge-light">{{ standingRequest.quantity }}</span>
+                  </div>
+                  <div class="float-right">
+                    <form ic-post-to="standing-request.php" ic-target="#delete-request-{{ standingRequest.id }}">
+                      <input type="hidden" name="id" value="{{ standingRequest.id }}">
+                      <input class="btn btn-outline-danger btn-sm" type="submit" name="delete-request" value="Delete">
+                    </form>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div><!-- card: Delete request -->
 
         <!-- Delete publisher -->
         <form action="publisher.php" method="POST">
           <input type="hidden" name="id" value="{{ publisher.id }}">
           <input type="hidden" name="firstName" value="{{ publisher.firstName}}">
-          <input class="btn btn-outline-danger btn-sm btn-block my-3" type="submit" name="delete_publisher" value="Delete Name">
+          <input class="btn btn-outline-danger btn-sm btn-block my-4" type="submit" name="delete_publisher" value="Delete Publisher">
         </form>
 
       </div><!-- collapse -->
