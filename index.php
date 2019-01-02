@@ -58,6 +58,7 @@ if (empty($msg)) {
 	    if ($record->getField('cRelatedRecords') > 0) {
 	    	foreach($related_records as $related_record) {
 		        $var1[] = array(
+		        'id' => $related_record->getField('StandingRequest::id'),
 		        'itemCode' => $related_record->getField('StandingRequest::itemCode'),
 		        'color' => $related_record->getField('StandingRequest::cColor'),
 		        'quantity' => $related_record->getField('StandingRequest::quantity'),
