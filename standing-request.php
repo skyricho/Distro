@@ -12,7 +12,9 @@ if (isset($_POST['add-request'])) {
     if (FileMaker::isError($result)) {
       echo "<p>Error: " . $result->getMessage() . "</p>"; exit;
     } 
-	  echo 'Request has been added.';
+	  echo '<div class="alert alert-light alert-dismissible fade show" role="alert">Request has been added.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>';
 
 } elseif (isset($_POST['update-request'])) {
     $request = $fm->newEditCommand('StandingRequest', $_POST['id']);
