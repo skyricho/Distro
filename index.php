@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 1); // To debug errors
+//ini_set('display_errors', 1); // To debug errors
 include ("dbaccess.php"); 
 require 'vendor/autoload.php';
 
@@ -75,6 +75,11 @@ if (empty($msg)) {
 	}
 }
 
+$layout =& $fm->getLayout('StandingRequest');
+// Value list returned an array
+$itemCodes = $layout->getValueListTwoFields('itemCode', 1);
+$languageCodes = $layout->getValueListTwoFields('languageCode', 1);
+
 if (isset($_GET['msg'])) {
 	$msg = $_GET['msg'];
 }
@@ -82,7 +87,9 @@ if (isset($_GET['msg'])) {
 echo $template->render(array(
         'statusFilter' => $_GET['filter'],
         'msg' => $msg,
-        'publishers' => $var
+        'publishers' => $var,
+        'itemCodes' => $itemCodes,
+        'languageCodes' => $languageCodes
         )
     );
 ?>
