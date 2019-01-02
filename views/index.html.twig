@@ -101,13 +101,16 @@
         </ul>
       </div>
 
-      <div>
-
-        <form action="publisher.php" method="POST">
-          <input type="hidden" name="id" value="' . $record->getField('id') . '">
-          <input type="hidden" name="firstName" value="' . $record->getField('firstName') . '">
-          <input class="btn btn-outline-primary btn-sm mt-2" type="submit" name="received" value="Received">
+      <div id="received-{{ publisher.id }}">
+        {% if publisher.status %}
+          <i>Received</i>
+        {% else %}
+        <form ic-post-to="publisher.php" ic-target="#received-{{ publisher.id }}">
+          <input type="hidden" name="id" value="{{ publisher.id }}">
+          <input type="hidden" name="firstName" value="{{ publisher.firstName }}">
+          <input class="btn btn-outline-primary btn-sm" type="submit" name="received" value="Received">
         </form>
+        {% endif %}
       </div>
 
       </div> <!-- flex -->
