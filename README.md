@@ -1,5 +1,8 @@
 # Distro
 
+### To do
+- [ ] Report page with total individual standingRequest Total vs congregation standingRequests and last updated date.
+
 ### URLs
 - index.php?filter= received, not-received
 - request.php?id=
@@ -11,7 +14,7 @@
 
 
 ### DISTRO Tables
-Publisher: id, firstName
-StandingRequest: periodical, quantity, langauge
-Periodical: title, itemCode
-Language: langauge
+- **Publisher:** id, firstName
+- **StandingRequest:** periodical, quantity, langauge
+- **Periodical:** title, itemCode
+- **Language:** langauge
