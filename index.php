@@ -71,6 +71,7 @@ if (empty($msg)) {
 	        'id' => $record->getField('id'),
 	        'firstName' => $record->getField('firstName'),
 	        'status' => $record->getField('status'),
+	        'note' => $record->getField('note'),
 	        'standingRequests' => $var1
 	    );
 	}
